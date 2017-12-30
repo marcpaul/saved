@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-export default class App extends React.Component {
-  render() {
-    return (<div>
-      <h2>Welcome to React!</h2>
-    </div>);
+export default class SearchBar extends React.Component {
+  render () {
+    return (
+      <input className="search" type="text" placeholder="Search..." value=""/>
+    )
   }
 }
