@@ -1,14 +1,7 @@
 import React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import TextField from 'material-ui/TextField'
-
-export class SavedUserKeyField extends React.Component {
-  render () {
-    return (
-      
-    )
-  }
-}
+import Settings from './settings'
 
 export class SearchBar extends React.Component {
   render () {
@@ -23,11 +16,22 @@ export class SearchBar extends React.Component {
   }
 }
 
+export class SiteContainer extends React.Component {
+  render () {
+    return (
+      <div>
+        <SearchBar />
+        {/* <Settings /> */}
+      </div>
+    )
+  }
+}
+
 export default class Container extends React.Component {
   render () {
     return (
       <MuiThemeProvider>
-        <SearchBar />
+        <SiteContainer />
       </MuiThemeProvider>
     )
   }
