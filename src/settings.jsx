@@ -61,8 +61,8 @@ class Settings extends React.Component {
           contentStyle={customContentStyle}
           open={true}
         >
-          <SavedUserKeyField/>
-          <SavedDevKeyField/>
+          <SavedUserKeyField />
+          <SavedDevKeyField />
       </Dialog>
       </div>
     )

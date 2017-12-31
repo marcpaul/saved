@@ -1,17 +1,59 @@
 import React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import TextField from 'material-ui/TextField'
+import AutoComplete from 'material-ui/AutoComplete'
+import MenuItem from 'material-ui/MenuItem'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
+import RaisedButton from 'material-ui/RaisedButton'
+import Badge from 'material-ui/Badge'
 import ContentAdd from 'material-ui/svg-icons/content/add'
-import List from 'material-ui/List'
 import Settings from './settings'
-import BookmarksListItem from './bookmark'
 
-export class BookmarksList extends React.Component {
+const style = {
+  badge: {
+    float: 'right',
+    display: 'inline'
+  },
+  settings: {
+    float: 'left',
+    display: 'inline'
+  }
+}
+
+const fruit = [
+  {
+    bk_id: 'J4RMe',
+    bk_url: 'https://dasauge.de',
+    bk_title: 'dasauge® – Designer, Fotografen, Agenturen, Portfolios und Jobs.',
+    bk_note: '',
+    bk_date: '2017-12-03 14:24:28'
+  },
+  {
+    bk_id: 'RLvZm',
+    bk_url: 'https://github.com/mthenw/frontail',
+    bk_title: 'mthenw/frontail',
+    bk_note: '',
+    bk_date: '2017-12-03 10:43:51'
+  }
+]
+
+const dataSourceTemplate = {
+  value: 'bk_url',
+  text: 'bk_title'
+}
+
+export class ReloadBookmarksButton extends React.Component {
   render () {
+    const bookmarksCount = this.props.bookmarksCount
     return (
-      <List>
-      </List>
+      <div>
+        <Badge
+          badgeContent={bookmarksCount}
+          primary={true}
+          style={style.badge}
+        >
+          <RaisedButton label="Reload Bookmarks" primary={true} />
+        </Badge>
+      </div>
     )
   }
 }
@@ -19,7 +61,7 @@ export class BookmarksList extends React.Component {
 export class SettingsButton extends React.Component {
   render () {
     return (
-      <FloatingActionButton secondary={true}>
+      <FloatingActionButton secondary={true} style={style.settings} >
         <ContentAdd />
       </FloatingActionButton>
     )
@@ -29,12 +71,17 @@ export class SettingsButton extends React.Component {
 export class SearchBar extends React.Component {
   render () {
     return (
-      <TextField
-        className="search"
-        floatingLabelText="search bookmarks"
-        fullWidth={true}
-        type='text'
-      />
+      <div>
+        <AutoComplete
+          floatingLabelText="search bookmarks on saved.io"
+          filter={AutoComplete.fuzzyFilter}
+          dataSource={fruit}
+          dataSourceConfig={dataSourceTemplate}
+          maxSearchResults={2}
+          fullWidth={true}
+          openOnFocus={true}
+        />
+      </div>
     )
   }
 }
@@ -44,8 +91,8 @@ export class SiteContainer extends React.Component {
     return (
       <div>
         <SettingsButton />
+        <ReloadBookmarksButton />
         <SearchBar />
-        <BookmarksList />
         {/* <Settings /> */}
       </div>
     )
