@@ -14,7 +14,7 @@ const keyFieldsStyle = {
   maxWidth: '50%'
 }
 
-export class SavedUserKeyField extends React.Component {
+class SavedUserKeyField extends React.Component {
   render () {
     return (
       <TextField
@@ -27,7 +27,7 @@ export class SavedUserKeyField extends React.Component {
   }
 }
 
-export class SavedDevKeyField extends React.Component {
+class SavedDevKeyField extends React.Component {
   render () {
     return (
       <TextField
@@ -40,7 +40,7 @@ export class SavedDevKeyField extends React.Component {
   }
 }
 
-export class Settings extends React.Component {
+class Settings extends React.Component {
   render () {
     const actions = [
       <FlatButton
