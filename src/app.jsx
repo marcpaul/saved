@@ -1,9 +1,26 @@
 import React from 'react'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import TextField from 'material-ui/TextField'
 
-export default class SearchBar extends React.Component {
+export class SearchBar extends React.Component {
   render () {
     return (
-      <input className="search" type="text" placeholder="Search..." value=""/>
+      <TextField
+        className="search"
+        floatingLabelText="search bookmarks"
+        fullWidth={true}
+        type='text'
+      />
+    )
+  }
+}
+
+export default class Container extends React.Component {
+  render () {
+    return (
+      <MuiThemeProvider>
+        <SearchBar />
+      </MuiThemeProvider>
     )
   }
 }
