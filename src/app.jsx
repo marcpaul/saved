@@ -5,7 +5,7 @@ import MenuItem from 'material-ui/MenuItem'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import Badge from 'material-ui/Badge'
-import ContentAdd from 'material-ui/svg-icons/content/add'
+import ActionSettings from 'material-ui/svg-icons/action/settings'
 import Settings from './settings'
 
 const style = {
@@ -42,6 +42,10 @@ const dataSourceTemplate = {
 }
 
 export class ReloadBookmarksButton extends React.Component {
+  handleClick () {
+    console.log(this)
+  }
+
   render () {
     const bookmarksCount = this.props.bookmarksCount
     return (
@@ -51,7 +55,11 @@ export class ReloadBookmarksButton extends React.Component {
           primary={true}
           style={style.badge}
         >
-          <RaisedButton label="Reload Bookmarks" primary={true} />
+          <RaisedButton
+            label="Reload Bookmarks"
+            primary={true}
+            onClick={this.handleClick}
+          />
         </Badge>
       </div>
     )
@@ -62,7 +70,7 @@ export class SettingsButton extends React.Component {
   render () {
     return (
       <FloatingActionButton secondary={true} style={style.settings} >
-        <ContentAdd />
+        <ActionSettings />
       </FloatingActionButton>
     )
   }
