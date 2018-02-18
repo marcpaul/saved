@@ -32,20 +32,19 @@ export class ReloadBookmarksButton extends React.Component {
   }
 
   render () {
-    const bookmarksCount = this.props.bookmarksCount
     return (
       <div>
-        <Badge
-          badgeContent={bookmarksCount}
+{/*         <Badge
+          badgeContent={this.props.bookmarksCount}
           primary={true}
           style={style.badge}
         >
-          <RaisedButton
-            label="Reload Bookmarks"
+ */}          <RaisedButton
+            label={this.props.bookmarksCount}
             primary={true}
             onClick={this.handleClick}
           />
-        </Badge>
+{/*         </Badge> */}
       </div>
     )
   }
@@ -65,14 +64,13 @@ export class SearchBar extends React.Component {
   render () {
     return (
       <div>
-        <AutoComplete
+         <AutoComplete
           floatingLabelText="search bookmarks on saved.io"
           filter={AutoComplete.fuzzyFilter}
-          dataSource={fruit}
+          dataSource={this.props.value}
           dataSourceConfig={dataSourceTemplate}
-          maxSearchResults={2}
           fullWidth={true}
-          openOnFocus={true}
+          openOnFocus={false}
         />
       </div>
     )
@@ -85,7 +83,7 @@ export class SiteContainer extends React.Component {
       <div>
         <SettingsButton />
         <ReloadBookmarksButton />
-        <SearchBar />
+        <SearchBar value={this.props.value} bookmarksCount={this.props.count} />
         {/* <Settings /> */}
       </div>
     )
@@ -95,15 +93,15 @@ export class SiteContainer extends React.Component {
 export default class Container extends React.Component {
   constructor (props) {
     super(props)
-    const init = {
-      method: 'GET'
-    }
-    this.state = {bookmarks: {}}
+    this.state = {bookmarks: [], count: null}
   }
 
   fetchData () {
+    const init = {
+      method: 'GET'
+    }
     const request = new Request(`http://devapi.saved.io/bookmarks?devkey=${devkey}&key=${key}&page=1&limit=1000`)
-    return fetch(request, this.props.init)
+    return fetch(request, init)
   }
 
   componentDidMount () {
@@ -115,9 +113,11 @@ export default class Container extends React.Component {
         })
         .then((data) => {
           this.setState({
-            bookmarks: data
+            bookmarks: data,
+            count: data.length
           })
-          console.log(this.state.bookmarks)
+          console.log(data.length)
+          // console.log(this.state.bookmarks)
         })
         .catch((error) => {
           // handleRequestError(error)
@@ -128,7 +128,7 @@ export default class Container extends React.Component {
   render () {
     return (
       <MuiThemeProvider>
-        <SiteContainer />
+        <SiteContainer value={this.state.bookmarks} count={this.state.count} />
       </MuiThemeProvider>
     )
   }
